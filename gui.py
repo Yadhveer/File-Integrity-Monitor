@@ -22,36 +22,45 @@ def run():
 
     cursor.execute(" SELECT File FROM hash; ")
     files = cursor.fetchall()
+    m = True
 
-    while True :
+    while(m == True) :
        
-                for i in range(0, len(files)):
-                    a = files[i]
-                    x = a[0]
+        for i in range(0, len(files)):
+            a = files[i]
+            x = a[0]
 
-                    file_object = open(x,"r")
+            file_object = open(x,"r")
 
-                    text = file_object.read()
-                    file_object.close()
-                    encoded_text = text.encode()
-                    hash = hashlib.sha256(encoded_text)
-                    readable_hash = hash.hexdigest()
+            text = file_object.read()
+            file_object.close()
+            encoded_text = text.encode()
+            hash = hashlib.sha256(encoded_text)
+            readable_hash = hash.hexdigest()
 
-                    query = """ SELECT Hash FROM hash WHERE File = %s """
-                    b = (x,)
-                    cursor.execute(query,a)
-                    files_check = cursor.fetchall()
+            query = """ SELECT Hash FROM hash WHERE File = %s """
+            b = (x,)
+            cursor.execute(query,a)
+            files_check = cursor.fetchall()
                     
-                    t = files_check[0]
-                    s = t[0]
+            t = files_check[0]
+            s = t[0]
 
-                    if(s == readable_hash):
-                        continue
-                    else:
-                        print(x)
-                        break    
-                break
+            if(s == readable_hash):
+                continue
+            else:
+                print(x)
+                change = customtkinter.CTkToplevel(app)
+                change.geometry("500x550")
+                change.title("Intruder Alert")
 
+                label1 = customtkinter.CTkLabel(master=change, text="Someone has changed your file")
+                label1.pack(pady = 50)
+
+                label2 = customtkinter.CTkLabel(master=change, text=x)
+                label2.pack(pady = 50)
+                m = False    
+        
     connection.commit()    
     connection.close()
 
