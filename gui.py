@@ -49,7 +49,6 @@ def run():
             if(s == readable_hash):
                 continue
             else:
-                print(x)
                 change = customtkinter.CTkToplevel(app)
                 change.geometry("500x550")
                 change.title("Intruder Alert")
