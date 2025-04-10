@@ -1,5 +1,47 @@
-# File-Integrity-Monitor
+File Integrity Monitor (FIM)
 
-This is a basic python based application in the field of information security. This is based on hashing a text file using SHA-256 and storing the same in a mysql database. The stored hash is then cross checked with a new hash that is generated on running the program and then gives an alert if the hash changes, as that means that its file has changed.
+A simple desktop application built using Python and `customtkinter` that allows you to monitor the integrity of important files by hashing and tracking their changes in a PostgreSQL database. It includes admin authentication and features a clean GUI interface.
 
-I have created a local MySQL server and have connected it to my python code such that the user can insert, update or delete files and their hashes if they wish to change their files.
+## Features
+
+-  **Admin Authentication** before sensitive actions
+-  **Add or Update File Hashes** (SHA-256)
+-  **Check Integrity** of monitored files
+-  **View All Records** from the database
+-  **Remove File Records** securely
+-  Scrollable GUI built with `customtkinter`
+-  PostgreSQL backend for persistent storage
+
+
+ Prerequisites
+
+- Python 3.10+
+- PostgreSQL installed and running
+- Git (if cloning the repo)
+
+ Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/Yadhveer/File-Integrity-Monitor.git
+   cd File-Integrity-Monitor
+
+2. Install dependencies:
+   
+   ```bash
+   pip install customtkinter psycopg2
+
+4. Configure your PostgreSQL credentials:
+5. Create the required database table:
+
+   CREATE TABLE IF NOT EXISTS hash (
+    name TEXT PRIMARY KEY,
+    hash_value TEXT,
+    last_modified TIMESTAMP
+);
+
+7. Run the application:
+
+   python app.py
+
